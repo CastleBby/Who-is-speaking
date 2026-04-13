@@ -56,6 +56,7 @@ def main():
                     )
 
                     mouth_ratio = compute_mouth_open_ratio(face_landmarks)
+                    print(f"Mouth open ratio: {mouth_ratio:.4f}")
                     break
 
             if mouth_ratio is not None:
