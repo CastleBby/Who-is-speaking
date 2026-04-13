@@ -1,3 +1,11 @@
+"""
+runs the Phase 1 live webcam pipeline for the "Who is Speaking?"
+project. It opens the webcam, detects a face using MediaPipe Face Mesh,
+draws facial landmarks, computes a simple mouth-open ratio, and displays
+that value on the video feed
+
+USAGE: PYTHONPATH=. python scripts/run_webcam.py
+"""
 import cv2
 import mediapipe as mp
 
@@ -12,6 +20,22 @@ from src.features.mouth_features import compute_mouth_open_ratio
 
 
 def main():
+    """
+        Run the live webcam face mesh and mouth signal pipeline.
+
+    This function:
+    1. initializes MediaPipe Face Mesh,
+    2. opens the webcam,
+    3. reads frames continuously,
+    4. detects face landmarks,
+    5. computes a mouth-open ratio for the detected face,
+    6. displays the result on the frame,
+    7. exits when the user presses 'q'.
+
+    Returns
+    -------
+    None
+    """
     mp_face_mesh = mp.solutions.face_mesh
     mp_drawing = mp.solutions.drawing_utils
     mp_drawing_styles = mp.solutions.drawing_styles
@@ -22,6 +46,7 @@ def main():
         print("Error: Could not open webcam.")
         return
 
+    # values come from src/config.py and help keep the video feed consistent
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, FRAME_WIDTH)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, FRAME_HEIGHT)
 

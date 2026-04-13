@@ -16,6 +16,7 @@ Phase 4: SPEAKER - Add overlap and turn taking cues
 
 
 ## File Organization:
+```
 who is speaking/
 │
 ├── README.md
@@ -83,3 +84,4 @@ who is speaking/
     ├── proposal.md
     ├── design_notes.md
     └── final_report_assets/
+```
