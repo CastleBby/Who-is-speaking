@@ -3,4 +3,6 @@ mediapipe==0.10.21
 numpy
 matplotlib
 jupyter
-pandas 
+pandas
+scipy
+ 

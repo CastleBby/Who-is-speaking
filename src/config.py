@@ -13,3 +13,12 @@ MIN_DETECTION_CONFIDENCE = 0.5
 # confidence following the face across frames
 # start at 0.5 baseline 
 MIN_TRACKING_CONFIDENCE = 0.5
+
+# mouth history of frames 
+MOUTH_HISTORY = 15
+
+# speaking minimum 
+SPEAKING_THRESHOLD = 0.02
+
+# match the distance 
+MATCH_DISTANCE_THRESHOLD = 80

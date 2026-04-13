@@ -7,10 +7,10 @@
 Video conferencing platforms such as Zoom and Google Meets have preliminary features to highlight the speaker, but sometimes there are still communication issues when multiple people try to talk at once. Face tracking that monitors facial landmarks and mouth motion over time without the use of audio could provide a visual estimate of who is actively speaking, help indicate who wants to speak or is trying to speak, and increase turn-taking awareness in group calls.  
 
 ## Pipeline Overview:
-Phase 1: DETECTION - Detect mouth motion signal for one face
-Phase 2: TRACKING - Add multi-face tracking with persistent IDs
-Phase 3: FEATURES - Estimate active Speaker
-Phase 4: SPEAKER - Add overlap and turn taking cues 
+Phase 1: DETECTION - Detect mouth motion signal for one face  
+Phase 2: TRACKING - Add multi-face tracking with persistent IDs  
+Phase 3: FEATURES - Estimate active Speaker  
+Phase 4: SPEAKER - Add overlap and turn taking cues  
 
 ## How to Run Demo: 
 
