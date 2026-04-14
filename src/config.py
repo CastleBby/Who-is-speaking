@@ -3,7 +3,7 @@ FRAME_WIDTH = 960
 FRAME_HEIGHT = 540
 
 # track one face first 
-MAX_NUM_FACES = 1
+MAX_NUM_FACES = 4
 
 # minimum confidence score to accept initial face detection 
 # tune higher for less false detections 
@@ -22,3 +22,5 @@ SPEAKING_THRESHOLD = 0.02
 
 # match the distance 
 MATCH_DISTANCE_THRESHOLD = 80
+
+MAX_MATCH_DISTANCE = 80
