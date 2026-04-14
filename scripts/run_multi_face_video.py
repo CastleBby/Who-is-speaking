@@ -35,6 +35,8 @@ from src.config import (
     HISTORY_SIZE,
     ACTIVE_SPEAKER_THRESHOLD,
     SPEAKER_MARGIN,
+    WANTS_TO_SPEAK_RATIO, 
+    WANTS_TO_SPEAK_THRESHOLD,
 )
 from src.features.mouth_features import compute_mouth_open_ratio
 from src.tracking.track_utils import get_face_bbox, get_bbox_center
@@ -224,6 +226,29 @@ def main():
                 else:
                     active_speaker_id = None
 
+            # ----------------------------------------
+            # Determine whether any other tracked face appears to want to speak
+            # ----------------------------------------
+            # This is a softer rule than the ACTIVE speaker rule.
+            # A face can be flagged as wanting to speak if:
+            # 1. it is not the active speaker,
+            # 2. its speaking score exceeds a smaller threshold,
+            # 3. its score is reasonably close to the active speaker's score.
+            wants_to_speak_ids = []
+
+            if active_speaker_id is not None and best_score > 0:
+                for track_id, track in tracks.items():
+                    if track_id == active_speaker_id:
+                        continue
+
+                    contender_score = track["speaking_score"]
+
+                    if (
+                        contender_score >= WANTS_TO_SPEAK_THRESHOLD
+                        and contender_score >= WANTS_TO_SPEAK_RATIO * best_score
+                    ):
+                        wants_to_speak_ids.append(track_id)
+
 
             # ----------------------------------------
             # Draw tracked faces and labels
@@ -239,8 +264,14 @@ def main():
                 if track_id == active_speaker_id:
                     label += " | ACTIVE"
                     color = (0, 255, 0)
+
+                elif track_id in wants_to_speak_ids:
+                    label += "WANTS TO TALK"
+                    color = (0, 255, 255) 
+                
                 else:
                     color = (255, 0, 0)
+                
 
                 # Draw the bounding box.
                 cv2.rectangle(frame, (x_min, y_min), (x_max, y_max), color, 2)
