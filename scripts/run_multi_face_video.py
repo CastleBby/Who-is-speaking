@@ -209,18 +209,21 @@ def main():
                 best_track_id, best_track = sorted_tracks[0]
                 best_score = best_track["speaking_score"]
 
-                # If there is more than one track, get the second-best score too.
-                if len(sorted_tracks) > 1:
-                    second_best_score = sorted_tracks[1][1]["speaking_score"]
+                second_best_score = (
+                    sorted_tracks[1][1]["speaking_score"]
+                    if len(sorted_tracks) > 1
+                    else 0.0
+                )
 
-                # Only assign an active speaker if:
-                # - the best score is high enough to matter, and
-                # - it is clearly above the second-best score
+                # assign one clearly stronger than 2nd highest with margin 
                 if (
                     best_score >= ACTIVE_SPEAKER_THRESHOLD
-                    and (best_score - second_best_score) >= SPEAKER_MARGIN
+                    and (best_score -second_best_score) >= SPEAKER_MARGIN
                 ):
                     active_speaker_id = best_track_id
+                else:
+                    active_speaker_id = None
+
 
             # ----------------------------------------
             # Draw tracked faces and labels

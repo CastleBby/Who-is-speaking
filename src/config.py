@@ -25,10 +25,15 @@ MATCH_DISTANCE_THRESHOLD = 80
 
 MAX_MATCH_DISTANCE = 80
 
-HISTORY_SIZE = 18
+HISTORY_SIZE = 20
 
 # to avoid tiny movements being false positives if no one is speaking
 ACTIVE_SPEAKER_THRESHOLD = 0.010
 
 
 SPEAKER_MARGIN = 0.004
+
+# rules to break the one person from hogging the mic 
+
+WANTS_TO_SPEAK_THRESHOLD = 0.008
+WANTS_TO_SPEAK_RATIO = 0.65
