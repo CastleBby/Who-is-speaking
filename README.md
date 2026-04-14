@@ -1,8 +1,7 @@
 # Project: "Who is speaking?"  
-**Author:** Emily Castelan 
-**Date:** April 12 2026 
+**Author:** Emily Castelan  
+**Date:** April 12 2026  
 
----
 ## Problem: 
 Video conferencing platforms such as Zoom and Google Meets have preliminary features to highlight the speaker, but sometimes there are still communication issues when multiple people try to talk at once. Face tracking that monitors facial landmarks and mouth motion over time without the use of audio could provide a visual estimate of who is actively speaking, help indicate who wants to speak or is trying to speak, and increase turn-taking awareness in group calls.  
 
