@@ -43,7 +43,7 @@ from src.tracking.face_tracker import FaceTracker
 # Set the input video path here
 # --------------------------------------------------
 # Change this path to match the location of your test video.
-VIDEO_PATH = "data/raw/sample_videos/test_multi_face.mp4"
+VIDEO_PATH = "data/raw/sample_videos/test_multi_face2.mp4"
 
 
 def main():
