@@ -8,21 +8,27 @@ MAX_NUM_FACES = 4
 # minimum confidence score to accept initial face detection 
 # tune higher for less false detections 
 # 0.5 = baseline threshold 
-MIN_DETECTION_CONFIDENCE = 0.5
+MIN_DETECTION_CONFIDENCE = 0.4
 
 # confidence following the face across frames
 # start at 0.5 baseline 
-MIN_TRACKING_CONFIDENCE = 0.5
+MIN_TRACKING_CONFIDENCE = 0.4
 
 # mouth history of frames 
-MOUTH_HISTORY = 15
+MOUTH_HISTORY = 18
 
 # speaking minimum 
-SPEAKING_THRESHOLD = 0.02
+SPEAKING_THRESHOLD = 0.08
 
 # match the distance 
 MATCH_DISTANCE_THRESHOLD = 80
 
 MAX_MATCH_DISTANCE = 80
 
-HISTORY_SIZE = 15
+HISTORY_SIZE = 18
+
+# to avoid tiny movements being false positives if no one is speaking
+ACTIVE_SPEAKER_THRESHOLD = 0.010
+
+
+SPEAKER_MARGIN = 0.004

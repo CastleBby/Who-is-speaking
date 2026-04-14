@@ -33,6 +33,8 @@ from src.config import (
     MIN_TRACKING_CONFIDENCE,
     MAX_MATCH_DISTANCE,
     HISTORY_SIZE,
+    ACTIVE_SPEAKER_THRESHOLD,
+    SPEAKER_MARGIN,
 )
 from src.features.mouth_features import compute_mouth_open_ratio
 from src.tracking.track_utils import get_face_bbox, get_bbox_center
@@ -190,13 +192,35 @@ def main():
             # ----------------------------------------
             # The active speaker is defined as the track with the highest
             # current speaking score.
-            active_speaker_id = None
-            best_score = -1.0
 
-            for track_id, track in tracks.items():
-                if track["speaking_score"] > best_score:
-                    best_score = track["speaking_score"]
-                    active_speaker_id = track_id
+            # This reduces false positives caused by tiny jitter or weak facial motion.
+            active_speaker_id = None
+            best_score = 0.0
+            second_best_score = 0.0
+
+            # Sort tracks by speaking score from highest to lowest.
+            sorted_tracks = sorted(
+                tracks.items(),
+                key=lambda item: item[1]["speaking_score"],
+                reverse=True,
+            )
+
+            if len(sorted_tracks) > 0:
+                best_track_id, best_track = sorted_tracks[0]
+                best_score = best_track["speaking_score"]
+
+                # If there is more than one track, get the second-best score too.
+                if len(sorted_tracks) > 1:
+                    second_best_score = sorted_tracks[1][1]["speaking_score"]
+
+                # Only assign an active speaker if:
+                # - the best score is high enough to matter, and
+                # - it is clearly above the second-best score
+                if (
+                    best_score >= ACTIVE_SPEAKER_THRESHOLD
+                    and (best_score - second_best_score) >= SPEAKER_MARGIN
+                ):
+                    active_speaker_id = best_track_id
 
             # ----------------------------------------
             # Draw tracked faces and labels
